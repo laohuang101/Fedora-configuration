@@ -113,6 +113,17 @@ sudo dnf copr enable @kernel-vanilla/mainline
 # 2. Upgrade your kernel packages from the new repo
 sudo dnf upgrade 'kernel*'
 ```
+## Remove Linux 7.1
+### Check the kernel
+```
+rpm -qa kernel
+uname -r
+```
+
+### Remove the version
+```
+sudo dnf remove kernel-7.1.0-0.rc3*
+```
 
 ## rEFInd
 ```
