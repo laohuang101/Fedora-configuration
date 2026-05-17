@@ -190,3 +190,29 @@ git clone https://github.com/winapps-org/winapps.git ~/.local/share/winapps
 cd ~/.local/share/winapps
 ./setup.sh --user
 ```
+### Brightness
+#### Linux 6.19
+```
+sudo nano /boot/refind_linux.conf
+```
+```
+Boot with standard options"  "root=UUID=c6e94e97-8b6e-4c08-86a2-47d70e9539e2 rw rootflags=subvol=root zswap.enabled=0 rootfstype=btrfs loglevel=3 quiet nvidia-drm.modeset=1 ipv6.disable=1 acpi_backlight=native"
+"Boot to single-user mode"    "root=UUID=c6e94e97-8b6e-4c08-86a2-47d70e9539e2 rw rootflags=subvol=root zswap.enabled=0 rootfstype=btrfs loglevel=3 quiet nvidia-drm.modeset=1 single ipv6.disable=1 acpi_backlight=native"
+```
+
+#### Linux 7.0 and above alt way
+##### Install
+```
+sudo dnf install gammastep
+```
+
+##### Key Bind
+```
+// === Brightness Controls ===
+XF86MonBrightnessUp allow-when-locked=true {
+    spawn "sh" "-c" "BR=$(cat /tmp/b 2>/dev/null || echo 1.0); BR=$(echo \"$BR + 0.1\" | bc); if [ $(echo \"$BR > 1.0\" | bc) -eq 1 ]; then BR=1.0; fi; echo $BR > /tmp/b; pkill gammastep; gammastep -O 6500 -b $BR"
+}
+XF86MonBrightnessDown allow-when-locked=true {
+    spawn "sh" "-c" "BR=$(cat /tmp/b 2>/dev/null || echo 1.0); BR=$(echo \"$BR - 0.1\" | bc); if [ $(echo \"$BR < 0.2\" | bc) -eq 1 ]; then BR=0.2; fi; echo $BR > /tmp/b; pkill gammastep; gammastep -O 6500 -b $BR"
+}
+```
