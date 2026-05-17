@@ -88,3 +88,17 @@ chmod +x burpsuite_installer.sh
 
 rm burpsuite_installer.sh
 ```
+
+## Remove Libre Office
+```
+sudo dnf remove "libreoffice*"
+```
+
+## install WPS office
+```
+# 1. Ensure the Flathub repository is enabled on your system
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+# 2. Install WPS Office from Flathub
+flatpak install flathub com.wps.Office
+```
