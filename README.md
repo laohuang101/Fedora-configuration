@@ -104,3 +104,12 @@ flatpak install flathub com.wps.Office
 
 flatpak run com.wps.Office
 ```
+
+## Try linux 7.1
+```
+# 1. Enable the mainline vanilla kernel repository
+sudo dnf copr enable @kernel-vanilla/mainline
+
+# 2. Upgrade your kernel packages from the new repo
+sudo dnf upgrade 'kernel*'
+```
