@@ -32,3 +32,7 @@ systemctl --user disable --now waybar.service
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf swap ffmpeg-free ffmpeg --allowerasing
 ```
+## Changing default shell to fish
+```
+sudo usermod --shell /usr/bin/fish $USER
+```
