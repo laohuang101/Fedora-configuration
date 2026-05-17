@@ -62,3 +62,29 @@ warp-cli mode warp
 ```
 sudo usermod --shell /usr/bin/fish $USER
 ```
+
+## Install autopsy
+```
+# 1. Install the snap daemon package
+sudo dnf install snapd
+
+# 2. Enable classic snap support (required by Fedora)
+sudo ln -s /var/lib/snapd/snap /snap
+
+# 3. Install Autopsy from the Snap store
+sudo snap install autopsy
+```
+
+## Install Burp
+```
+# 1. Download the official Linux 64-bit installer script
+curl -Lo burpsuite_installer.sh "https://portswigger.net/burp/releases/download?product=community&type=Linux"
+
+# 2. Grant the script executable permissions
+chmod +x burpsuite_installer.sh
+
+# 3. Run the installation script wizard
+./burpsuite_installer.sh
+
+rm burpsuite_installer.sh
+```
