@@ -124,3 +124,69 @@ sudo mkdir -p /boot/efi/EFI/refind/themes
 sudo cp -r ./RONBM /boot/efi/EFI/refind/themes/RONBM
 sudo nano /boot/efi/EFI/refind/refind.conf
 ```
+
+## WinApps
+### Install KVM
+```
+sudo dnf install -y qemu-kvm libvirt virt-manager virt-viewer \
+
+dnsmasq bridge-utils netcat libguestfs-tools \
+swtpm dialog freerdp
+
+sudo usermod -aG libvirt $(whoami)
+sudo systemctl enable --now libvirtd
+mkdir -p ~/.config/libvirt
+echo 'uri_default = "qemu:///system"' > ~/.config/libvirt/libvirt.conf
+sudo usermod -a -G libvirt <username>
+sudo usermod -a -G kvm <username>
+```
+### Get Win 11 Pro (if upgrade fail using free key)
+#### key: 
+```
+VK7JG-NPHTM-C97JM-9MPGT-3V66T
+```
+#### If Fail:
+Disconnect internet connection then:
+```
+mkdir ~/win11_patch && cd ~/win11_patch
+nano ei.cfg
+```
+```
+[EditionID]
+Professional
+[Channel]
+Retail
+```
+```
+dd if=/dev/zero of=patch.img bs=1M count=10
+mkfs.vfat patch.img
+sudo mkdir /mnt/patch
+sudo mount patch.img /mnt/patch
+sudo mkdir /mnt/patch/sources
+sudo cp ei.cfg /mnt/patch/sources/
+sudo umount /mnt/patch
+```
+### In windows set allow list
+```
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList" /v fDisabledAllowList /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\TSAppAllowList" /v fApplicationsSpecified /t REG_DWORD /d 0 /f
+```
+
+### Setup windows login info
+```
+mkdir -p ~/.config/winapps
+nano ~/.config/winapps/winapps.conf
+```
+```
+RDP_USER="<username>"
+RDP_PASS="<password>"
+WAFLAVOR="libvirt"
+GUEST_NAME="win11"
+LIBVIRT_URI="qemu:///system"
+```
+```
+rm -rf ~/.local/share/winapps
+git clone https://github.com/winapps-org/winapps.git ~/.local/share/winapps
+cd ~/.local/share/winapps
+./setup.sh --user
+```
