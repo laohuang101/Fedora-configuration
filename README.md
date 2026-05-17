@@ -113,3 +113,14 @@ sudo dnf copr enable @kernel-vanilla/mainline
 # 2. Upgrade your kernel packages from the new repo
 sudo dnf upgrade 'kernel*'
 ```
+
+## rEFInd
+```
+sudo dnf install rEFInd
+git clone https://github.com/gutlessCGH/RONBM.git
+sudo refind-install
+sudo mkrlconf
+sudo mkdir -p /boot/efi/EFI/refind/themes
+sudo cp -r ./RONBM /boot/efi/EFI/refind/themes/RONBM
+sudo nano /boot/efi/EFI/refind/refind.conf
+```
