@@ -101,4 +101,6 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 
 # 2. Install WPS Office from Flathub
 flatpak install flathub com.wps.Office
+
+flatpak run com.wps.Office
 ```
