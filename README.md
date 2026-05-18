@@ -227,3 +227,9 @@ XF86MonBrightnessDown allow-when-locked=true {
     spawn "sh" "-c" "BR=$(cat /tmp/b 2>/dev/null || echo 1.0); BR=$(echo \"$BR - 0.1\" | bc); if [ $(echo \"$BR < 0.2\" | bc) -eq 1 ]; then BR=0.2; fi; echo $BR > /tmp/b; pkill gammastep; gammastep -O 6500 -b $BR"
 }
 ```
+
+## Install Time New Romans
+```
+sudo rpm -i --nodeps --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+fc-cache -f -v
+```
