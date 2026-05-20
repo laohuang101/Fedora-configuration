@@ -233,3 +233,18 @@ XF86MonBrightnessDown allow-when-locked=true {
 sudo rpm -i --nodeps --nodigest https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 fc-cache -f -v
 ```
+
+## Fix file upload error
+```
+mkdir -p ~/.config/xdg-desktop-portal/
+nano ~/.config/xdg-desktop-portal/niri-portals.conf
+```
+```
+[preferred]
+default=gnome;gtk;
+org.freedesktop.impl.portal.FileChooser=gtk;
+```
+```
+sudo dnf install xdg-desktop-portal-gtk
+systemctl --user restart xdg-desktop-portal.service
+```
